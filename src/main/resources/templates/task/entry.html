@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/style/main.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+<title>Enter a Task</title>
+</head>
+<body>
+<h1>Task Entry</h1>
+<div class="input-form">
+<form th:action="@{/__${action}__}" th:object="${taskDto}" method="post">
+   <input th:field="*{id}" id="id" type="hidden" th:if="${action}=='task/edit'"/>
+   <div>
+     <label class="active" for="description">Description</label>
+	 <input th:field="*{description}" id="description" type="text"/>
+   </div>
+   <div>
+     <label class="active" for="startDate">Start Date</label>
+     <input th:field="*{startDate}" id="startDate" type="text"/>
+   </div>
+   <div>
+     <label class="active" for="completionDate">Completion Date</label>
+     <input th:field="*{completionDate}" id="completionDate" type="text"/>
+   </div>
+   <div>
+     <label for="priority">Priority</label>
+         <select id="priority" th:field="*{priority}">
+            <option value="" selected="selected">-- Please select one --</option>
+		    <option th:each="priorityOpt : ${priorities}"
+	                  th:value="${priorityOpt}"
+	                  th:text="${priorityOpt}"></option>
+	      </select>
+   </div>
+   <div>
+     <label for="status">Status</label>
+         <select id="status" th:field="*{status}">
+            <option value="" selected="selected">-- Please select one --</option>
+		    <option th:each="statusOpt : ${statuses}"
+	                  th:value="${statusOpt}"
+	                  th:text="${statusOpt}"></option>
+	      </select>
+   </div>
+   <div>
+     <button type="submit" name="save">Save</button>
+     <button type="submit" name="cancel" formnovalidate="formnovalidate">Cancel</button>
+   </div>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/style/main.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+<title>List Tasks</title>
+</head>
+<body>
+<h1>Tasks</h1>
+<table>
+    <thead>
+      <tr>
+	      <th data-field="description">Description</th>
+	      <th data-field="startDate">Start Date</th>
+	      <th data-field="completionDate">Completion Date</th>
+	      <th data-field="priority">Priority</th>
+	      <th data-field="status">Status</th>
+	      <th><a th:href="@{/task/add}">Add</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="task : ${tasks}">
+         <td th:text="${task.description}">Desc</td>
+         <td th:text="${task.startDate}">Start Date</td>
+         <td th:text="${task.completionDate}">Completion Date</td>
+         <td th:text="${task.priority}">Priority</td>
+         <td th:text="${task.status}">Status</td>
+         <td>
+            <a th:href="@{/task/edit(id=${task.id})}">Edit</a>
+            <a th:href="@{/task/delete(id=${task.id})}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a>
+         </td>
+      </tr>
+    </tbody>
+</table>
+</body>
+</html>
